@@ -111,6 +111,26 @@
       "thumbnail": "assets/images/thumbnails/fudan-diorama-thumb.jpg"
     },
     {
+      "id": "glacier",
+      "name_en": "Glacier National Park",
+      "name_cn": "冰川国家公园",
+      "category": "nature",
+      "source_image": "glacier-diorama.png",
+      "prompt_file": "prompts/glacier.txt",
+      "preview": "assets/images/preview/glacier-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/glacier-diorama-thumb.jpg"
+    },
+    {
+      "id": "grand-canyon",
+      "name_en": "Grand Canyon National Park",
+      "name_cn": "大峡谷国家公园",
+      "category": "nature",
+      "source_image": "grand-canyon-diorama.png",
+      "prompt_file": "prompts/grand-canyon.txt",
+      "preview": "assets/images/preview/grand-canyon-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/grand-canyon-diorama-thumb.jpg"
+    },
+    {
       "id": "harvard",
       "name_en": "Harvard University",
       "name_cn": "哈佛大学",
@@ -301,6 +321,16 @@
       "thumbnail": "assets/images/thumbnails/psl-paris-diorama-thumb.jpg"
     },
     {
+      "id": "rocky-mountain",
+      "name_en": "Rocky Mountain National Park",
+      "name_cn": "落基山国家公园",
+      "category": "nature",
+      "source_image": "rocky-mountain-diorama.png",
+      "prompt_file": "prompts/rocky-mountain.txt",
+      "preview": "assets/images/preview/rocky-mountain-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/rocky-mountain-diorama-thumb.jpg"
+    },
+    {
       "id": "sequoia",
       "name_en": "Sequoia National Park",
       "name_cn": "红杉国家公园",
@@ -421,16 +451,6 @@
       "thumbnail": "assets/images/thumbnails/ucl-diorama-thumb.jpg"
     },
     {
-      "id": "ucsb-v2",
-      "name_en": "UC Santa Barbara (V2)",
-      "name_cn": "加州大学圣芭芭拉分校 (V2)",
-      "category": "university",
-      "source_image": "ucsb-diorama-v2.png",
-      "prompt_file": null,
-      "preview": "assets/images/preview/ucsb-diorama-v2-preview.jpg",
-      "thumbnail": "assets/images/thumbnails/ucsb-diorama-v2-thumb.jpg"
-    },
-    {
       "id": "ucsb",
       "name_en": "UC Santa Barbara",
       "name_cn": "加州大学圣芭芭拉分校",
@@ -441,14 +461,14 @@
       "thumbnail": "assets/images/thumbnails/ucsb-diorama-thumb.jpg"
     },
     {
-      "id": "uncc-v2",
-      "name_en": "UNC Charlotte (V2)",
-      "name_cn": "北卡罗来纳大学夏洛特分校 (V2)",
+      "id": "ucsb-v2",
+      "name_en": "UC Santa Barbara (V2)",
+      "name_cn": "加州大学圣芭芭拉分校 (V2)",
       "category": "university",
-      "source_image": "uncc-diorama-v2.png",
+      "source_image": "ucsb-diorama-v2.png",
       "prompt_file": null,
-      "preview": "assets/images/preview/uncc-diorama-v2-preview.jpg",
-      "thumbnail": "assets/images/thumbnails/uncc-diorama-v2-thumb.jpg"
+      "preview": "assets/images/preview/ucsb-diorama-v2-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/ucsb-diorama-v2-thumb.jpg"
     },
     {
       "id": "uncc",
@@ -459,6 +479,16 @@
       "prompt_file": null,
       "preview": "assets/images/preview/uncc-diorama-preview.jpg",
       "thumbnail": "assets/images/thumbnails/uncc-diorama-thumb.jpg"
+    },
+    {
+      "id": "uncc-v2",
+      "name_en": "UNC Charlotte (V2)",
+      "name_cn": "北卡罗来纳大学夏洛特分校 (V2)",
+      "category": "university",
+      "source_image": "uncc-diorama-v2.png",
+      "prompt_file": null,
+      "preview": "assets/images/preview/uncc-diorama-v2-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/uncc-diorama-v2-thumb.jpg"
     },
     {
       "id": "unsw",
@@ -501,6 +531,16 @@
       "thumbnail": "assets/images/thumbnails/yale-diorama-thumb.jpg"
     },
     {
+      "id": "yellowstone",
+      "name_en": "Yellowstone National Park",
+      "name_cn": "黄石国家公园",
+      "category": "nature",
+      "source_image": "yellowstone-diorama.png",
+      "prompt_file": "prompts/yellowstone.txt",
+      "preview": "assets/images/preview/yellowstone-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/yellowstone-diorama-thumb.jpg"
+    },
+    {
       "id": "yosemite",
       "name_en": "Yosemite National Park",
       "name_cn": "优胜美地国家公园",
@@ -509,6 +549,16 @@
       "prompt_file": null,
       "preview": "assets/images/preview/yosemite-diorama-preview.jpg",
       "thumbnail": "assets/images/thumbnails/yosemite-diorama-thumb.jpg"
+    },
+    {
+      "id": "zion",
+      "name_en": "Zion National Park",
+      "name_cn": "锡安国家公园",
+      "category": "nature",
+      "source_image": "zion-diorama.png",
+      "prompt_file": "prompts/zion.txt",
+      "preview": "assets/images/preview/zion-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/zion-diorama-thumb.jpg"
     }
   ],
   "total": 51
