@@ -1,0 +1,515 @@
+{
+  "products": [
+    {
+      "id": "anu",
+      "name_en": "Australian National University",
+      "name_cn": "澳大利亚国立大学",
+      "category": "university",
+      "source_image": "anu-diorama.png",
+      "prompt_file": "prompts/anu.txt",
+      "preview": "assets/images/preview/anu-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/anu-diorama-thumb.jpg"
+    },
+    {
+      "id": "berkeley",
+      "name_en": "UC Berkeley",
+      "name_cn": "加州大学伯克利分校",
+      "category": "university",
+      "source_image": "berkeley-diorama.png",
+      "prompt_file": "prompts/berkeley.txt",
+      "preview": "assets/images/preview/berkeley-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/berkeley-diorama-thumb.jpg"
+    },
+    {
+      "id": "caltech",
+      "name_en": "Caltech",
+      "name_cn": "加州理工学院",
+      "category": "university",
+      "source_image": "caltech-diorama.png",
+      "prompt_file": "prompts/caltech.txt",
+      "preview": "assets/images/preview/caltech-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/caltech-diorama-thumb.jpg"
+    },
+    {
+      "id": "cambridge",
+      "name_en": "University of Cambridge",
+      "name_cn": "剑桥大学",
+      "category": "university",
+      "source_image": "cambridge-diorama.png",
+      "prompt_file": "prompts/cambridge.txt",
+      "preview": "assets/images/preview/cambridge-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/cambridge-diorama-thumb.jpg"
+    },
+    {
+      "id": "columbia",
+      "name_en": "Columbia University",
+      "name_cn": "哥伦比亚大学",
+      "category": "university",
+      "source_image": "columbia-diorama.png",
+      "prompt_file": "prompts/columbia.txt",
+      "preview": "assets/images/preview/columbia-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/columbia-diorama-thumb.jpg"
+    },
+    {
+      "id": "cornell",
+      "name_en": "Cornell University",
+      "name_cn": "康奈尔大学",
+      "category": "university",
+      "source_image": "cornell-diorama.png",
+      "prompt_file": "prompts/cornell.txt",
+      "preview": "assets/images/preview/cornell-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/cornell-diorama-thumb.jpg"
+    },
+    {
+      "id": "cuhk",
+      "name_en": "Chinese University of Hong Kong",
+      "name_cn": "香港中文大学",
+      "category": "university",
+      "source_image": "cuhk-diorama.png",
+      "prompt_file": "prompts/cuhk.txt",
+      "preview": "assets/images/preview/cuhk-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/cuhk-diorama-thumb.jpg"
+    },
+    {
+      "id": "edinburgh",
+      "name_en": "University of Edinburgh",
+      "name_cn": "爱丁堡大学",
+      "category": "university",
+      "source_image": "edinburgh-diorama.png",
+      "prompt_file": "prompts/edinburgh.txt",
+      "preview": "assets/images/preview/edinburgh-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/edinburgh-diorama-thumb.jpg"
+    },
+    {
+      "id": "epfl",
+      "name_en": "EPFL",
+      "name_cn": "洛桑联邦理工学院",
+      "category": "university",
+      "source_image": "epfl-diorama.png",
+      "prompt_file": "prompts/epfl.txt",
+      "preview": "assets/images/preview/epfl-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/epfl-diorama-thumb.jpg"
+    },
+    {
+      "id": "eth-zurich",
+      "name_en": "ETH Zurich",
+      "name_cn": "苏黎世联邦理工学院",
+      "category": "university",
+      "source_image": "eth-zurich-diorama.png",
+      "prompt_file": "prompts/eth-zurich.txt",
+      "preview": "assets/images/preview/eth-zurich-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/eth-zurich-diorama-thumb.jpg"
+    },
+    {
+      "id": "fudan",
+      "name_en": "Fudan University",
+      "name_cn": "复旦大学",
+      "category": "university",
+      "source_image": "fudan-diorama.png",
+      "prompt_file": "prompts/fudan.txt",
+      "preview": "assets/images/preview/fudan-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/fudan-diorama-thumb.jpg"
+    },
+    {
+      "id": "harvard",
+      "name_en": "Harvard University",
+      "name_cn": "哈佛大学",
+      "category": "university",
+      "source_image": "harvard-diorama.png",
+      "prompt_file": "prompts/harvard.txt",
+      "preview": "assets/images/preview/harvard-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/harvard-diorama-thumb.jpg"
+    },
+    {
+      "id": "hku",
+      "name_en": "University of Hong Kong",
+      "name_cn": "香港大学",
+      "category": "university",
+      "source_image": "hku-diorama.png",
+      "prompt_file": "prompts/hku.txt",
+      "preview": "assets/images/preview/hku-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/hku-diorama-thumb.jpg"
+    },
+    {
+      "id": "hkust",
+      "name_en": "Hong Kong University of Science and Technology",
+      "name_cn": "香港科技大学",
+      "category": "university",
+      "source_image": "hkust-diorama.png",
+      "prompt_file": "prompts/hkust.txt",
+      "preview": "assets/images/preview/hkust-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/hkust-diorama-thumb.jpg"
+    },
+    {
+      "id": "imperial",
+      "name_en": "Imperial College London",
+      "name_cn": "帝国理工学院",
+      "category": "university",
+      "source_image": "imperial-diorama.png",
+      "prompt_file": "prompts/imperial.txt",
+      "preview": "assets/images/preview/imperial-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/imperial-diorama-thumb.jpg"
+    },
+    {
+      "id": "ipp",
+      "name_en": "Institut Polytechnique de Paris",
+      "name_cn": "巴黎综合理工学院",
+      "category": "university",
+      "source_image": "ipp-diorama.png",
+      "prompt_file": "prompts/ipp.txt",
+      "preview": "assets/images/preview/ipp-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/ipp-diorama-thumb.jpg"
+    },
+    {
+      "id": "johns-hopkins",
+      "name_en": "Johns Hopkins University",
+      "name_cn": "约翰斯·霍普金斯大学",
+      "category": "university",
+      "source_image": "johns-hopkins-diorama.png",
+      "prompt_file": "prompts/johns-hopkins.txt",
+      "preview": "assets/images/preview/johns-hopkins-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/johns-hopkins-diorama-thumb.jpg"
+    },
+    {
+      "id": "kcl",
+      "name_en": "King's College London",
+      "name_cn": "伦敦国王学院",
+      "category": "university",
+      "source_image": "kcl-diorama.png",
+      "prompt_file": "prompts/kcl.txt",
+      "preview": "assets/images/preview/kcl-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/kcl-diorama-thumb.jpg"
+    },
+    {
+      "id": "manchester",
+      "name_en": "University of Manchester",
+      "name_cn": "曼彻斯特大学",
+      "category": "university",
+      "source_image": "manchester-diorama.png",
+      "prompt_file": "prompts/manchester.txt",
+      "preview": "assets/images/preview/manchester-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/manchester-diorama-thumb.jpg"
+    },
+    {
+      "id": "mcgill",
+      "name_en": "McGill University",
+      "name_cn": "麦吉尔大学",
+      "category": "university",
+      "source_image": "mcgill-diorama.png",
+      "prompt_file": "prompts/mcgill.txt",
+      "preview": "assets/images/preview/mcgill-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/mcgill-diorama-thumb.jpg"
+    },
+    {
+      "id": "melbourne",
+      "name_en": "University of Melbourne",
+      "name_cn": "墨尔本大学",
+      "category": "university",
+      "source_image": "melbourne-diorama.png",
+      "prompt_file": "prompts/melbourne.txt",
+      "preview": "assets/images/preview/melbourne-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/melbourne-diorama-thumb.jpg"
+    },
+    {
+      "id": "mit",
+      "name_en": "MIT",
+      "name_cn": "麻省理工学院",
+      "category": "university",
+      "source_image": "mit-diorama.png",
+      "prompt_file": "prompts/mit.txt",
+      "preview": "assets/images/preview/mit-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/mit-diorama-thumb.jpg"
+    },
+    {
+      "id": "monash",
+      "name_en": "Monash University",
+      "name_cn": "莫纳什大学",
+      "category": "university",
+      "source_image": "monash-diorama.png",
+      "prompt_file": "prompts/monash.txt",
+      "preview": "assets/images/preview/monash-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/monash-diorama-thumb.jpg"
+    },
+    {
+      "id": "northwestern",
+      "name_en": "Northwestern University",
+      "name_cn": "西北大学",
+      "category": "university",
+      "source_image": "northwestern-diorama.png",
+      "prompt_file": "prompts/northwestern.txt",
+      "preview": "assets/images/preview/northwestern-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/northwestern-diorama-thumb.jpg"
+    },
+    {
+      "id": "ntu",
+      "name_en": "NTU Singapore",
+      "name_cn": "南洋理工大学",
+      "category": "university",
+      "source_image": "ntu-diorama.png",
+      "prompt_file": "prompts/ntu.txt",
+      "preview": "assets/images/preview/ntu-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/ntu-diorama-thumb.jpg"
+    },
+    {
+      "id": "nus",
+      "name_en": "NUS Singapore",
+      "name_cn": "新加坡国立大学",
+      "category": "university",
+      "source_image": "nus-diorama.png",
+      "prompt_file": "prompts/nus.txt",
+      "preview": "assets/images/preview/nus-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/nus-diorama-thumb.jpg"
+    },
+    {
+      "id": "oxford",
+      "name_en": "University of Oxford",
+      "name_cn": "牛津大学",
+      "category": "university",
+      "source_image": "oxford-diorama.png",
+      "prompt_file": "prompts/oxford.txt",
+      "preview": "assets/images/preview/oxford-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/oxford-diorama-thumb.jpg"
+    },
+    {
+      "id": "peking",
+      "name_en": "Peking University",
+      "name_cn": "北京大学",
+      "category": "university",
+      "source_image": "peking-diorama.png",
+      "prompt_file": "prompts/peking.txt",
+      "preview": "assets/images/preview/peking-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/peking-diorama-thumb.jpg"
+    },
+    {
+      "id": "princeton",
+      "name_en": "Princeton University",
+      "name_cn": "普林斯顿大学",
+      "category": "university",
+      "source_image": "princeton-diorama.png",
+      "prompt_file": "prompts/princeton.txt",
+      "preview": "assets/images/preview/princeton-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/princeton-diorama-thumb.jpg"
+    },
+    {
+      "id": "psl-paris",
+      "name_en": "PSL University Paris",
+      "name_cn": "巴黎文理研究大学",
+      "category": "university",
+      "source_image": "psl-paris-diorama.png",
+      "prompt_file": "prompts/psl-paris.txt",
+      "preview": "assets/images/preview/psl-paris-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/psl-paris-diorama-thumb.jpg"
+    },
+    {
+      "id": "sequoia",
+      "name_en": "Sequoia National Park",
+      "name_cn": "红杉国家公园",
+      "category": "nature",
+      "source_image": "sequoia-diorama.png",
+      "prompt_file": null,
+      "preview": "assets/images/preview/sequoia-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/sequoia-diorama-thumb.jpg"
+    },
+    {
+      "id": "sjtu",
+      "name_en": "Shanghai Jiao Tong University",
+      "name_cn": "上海交通大学",
+      "category": "university",
+      "source_image": "sjtu-diorama.png",
+      "prompt_file": "prompts/sjtu.txt",
+      "preview": "assets/images/preview/sjtu-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/sjtu-diorama-thumb.jpg"
+    },
+    {
+      "id": "snu",
+      "name_en": "Seoul National University",
+      "name_cn": "首尔国立大学",
+      "category": "university",
+      "source_image": "snu-diorama.png",
+      "prompt_file": "prompts/snu.txt",
+      "preview": "assets/images/preview/snu-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/snu-diorama-thumb.jpg"
+    },
+    {
+      "id": "stanford",
+      "name_en": "Stanford University",
+      "name_cn": "斯坦福大学",
+      "category": "university",
+      "source_image": "stanford-diorama.png",
+      "prompt_file": "prompts/stanford.txt",
+      "preview": "assets/images/preview/stanford-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/stanford-diorama-thumb.jpg"
+    },
+    {
+      "id": "sydney",
+      "name_en": "University of Sydney",
+      "name_cn": "悉尼大学",
+      "category": "university",
+      "source_image": "sydney-diorama.png",
+      "prompt_file": "prompts/sydney.txt",
+      "preview": "assets/images/preview/sydney-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/sydney-diorama-thumb.jpg"
+    },
+    {
+      "id": "tokyo",
+      "name_en": "University of Tokyo",
+      "name_cn": "东京大学",
+      "category": "university",
+      "source_image": "tokyo-diorama.png",
+      "prompt_file": "prompts/tokyo.txt",
+      "preview": "assets/images/preview/tokyo-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/tokyo-diorama-thumb.jpg"
+    },
+    {
+      "id": "toronto",
+      "name_en": "University of Toronto",
+      "name_cn": "多伦多大学",
+      "category": "university",
+      "source_image": "toronto-diorama.png",
+      "prompt_file": "prompts/toronto.txt",
+      "preview": "assets/images/preview/toronto-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/toronto-diorama-thumb.jpg"
+    },
+    {
+      "id": "tsinghua",
+      "name_en": "Tsinghua University",
+      "name_cn": "清华大学",
+      "category": "university",
+      "source_image": "tsinghua-diorama.png",
+      "prompt_file": "prompts/tsinghua.txt",
+      "preview": "assets/images/preview/tsinghua-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/tsinghua-diorama-thumb.jpg"
+    },
+    {
+      "id": "tum",
+      "name_en": "Technical University of Munich",
+      "name_cn": "慕尼黑工业大学",
+      "category": "university",
+      "source_image": "tum-diorama.png",
+      "prompt_file": "prompts/tum.txt",
+      "preview": "assets/images/preview/tum-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/tum-diorama-thumb.jpg"
+    },
+    {
+      "id": "ubc",
+      "name_en": "University of British Columbia",
+      "name_cn": "不列颠哥伦比亚大学",
+      "category": "university",
+      "source_image": "ubc-diorama.png",
+      "prompt_file": "prompts/ubc.txt",
+      "preview": "assets/images/preview/ubc-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/ubc-diorama-thumb.jpg"
+    },
+    {
+      "id": "uchicago",
+      "name_en": "University of Chicago",
+      "name_cn": "芝加哥大学",
+      "category": "university",
+      "source_image": "uchicago-diorama.png",
+      "prompt_file": "prompts/uchicago.txt",
+      "preview": "assets/images/preview/uchicago-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/uchicago-diorama-thumb.jpg"
+    },
+    {
+      "id": "ucl",
+      "name_en": "University College London",
+      "name_cn": "伦敦大学学院",
+      "category": "university",
+      "source_image": "ucl-diorama.png",
+      "prompt_file": "prompts/ucl.txt",
+      "preview": "assets/images/preview/ucl-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/ucl-diorama-thumb.jpg"
+    },
+    {
+      "id": "ucsb-v2",
+      "name_en": "UC Santa Barbara (V2)",
+      "name_cn": "加州大学圣芭芭拉分校 (V2)",
+      "category": "university",
+      "source_image": "ucsb-diorama-v2.png",
+      "prompt_file": null,
+      "preview": "assets/images/preview/ucsb-diorama-v2-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/ucsb-diorama-v2-thumb.jpg"
+    },
+    {
+      "id": "ucsb",
+      "name_en": "UC Santa Barbara",
+      "name_cn": "加州大学圣芭芭拉分校",
+      "category": "university",
+      "source_image": "ucsb-diorama.png",
+      "prompt_file": null,
+      "preview": "assets/images/preview/ucsb-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/ucsb-diorama-thumb.jpg"
+    },
+    {
+      "id": "uncc-v2",
+      "name_en": "UNC Charlotte (V2)",
+      "name_cn": "北卡罗来纳大学夏洛特分校 (V2)",
+      "category": "university",
+      "source_image": "uncc-diorama-v2.png",
+      "prompt_file": null,
+      "preview": "assets/images/preview/uncc-diorama-v2-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/uncc-diorama-v2-thumb.jpg"
+    },
+    {
+      "id": "uncc",
+      "name_en": "UNC Charlotte",
+      "name_cn": "北卡罗来纳大学夏洛特分校",
+      "category": "university",
+      "source_image": "uncc-diorama.png",
+      "prompt_file": null,
+      "preview": "assets/images/preview/uncc-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/uncc-diorama-thumb.jpg"
+    },
+    {
+      "id": "unsw",
+      "name_en": "UNSW Sydney",
+      "name_cn": "新南威尔士大学",
+      "category": "university",
+      "source_image": "unsw-diorama.png",
+      "prompt_file": "prompts/unsw.txt",
+      "preview": "assets/images/preview/unsw-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/unsw-diorama-thumb.jpg"
+    },
+    {
+      "id": "upenn",
+      "name_en": "University of Pennsylvania",
+      "name_cn": "宾夕法尼亚大学",
+      "category": "university",
+      "source_image": "upenn-diorama.png",
+      "prompt_file": "prompts/upenn.txt",
+      "preview": "assets/images/preview/upenn-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/upenn-diorama-thumb.jpg"
+    },
+    {
+      "id": "uq",
+      "name_en": "University of Queensland",
+      "name_cn": "昆士兰大学",
+      "category": "university",
+      "source_image": "uq-diorama.png",
+      "prompt_file": "prompts/uq.txt",
+      "preview": "assets/images/preview/uq-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/uq-diorama-thumb.jpg"
+    },
+    {
+      "id": "yale",
+      "name_en": "Yale University",
+      "name_cn": "耶鲁大学",
+      "category": "university",
+      "source_image": "yale-diorama.png",
+      "prompt_file": "prompts/yale.txt",
+      "preview": "assets/images/preview/yale-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/yale-diorama-thumb.jpg"
+    },
+    {
+      "id": "yosemite",
+      "name_en": "Yosemite National Park",
+      "name_cn": "优胜美地国家公园",
+      "category": "nature",
+      "source_image": "yosemite-diorama.png",
+      "prompt_file": null,
+      "preview": "assets/images/preview/yosemite-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/yosemite-diorama-thumb.jpg"
+    }
+  ],
+  "total": 51
+}

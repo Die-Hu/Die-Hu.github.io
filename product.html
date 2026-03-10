@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product | Diorama Studio</title>
+  <meta name="description" content="AI-generated diorama miniature art - high resolution image with full prompt included.">
+  <meta property="og:title" content="Diorama | Diorama Studio">
+  <meta property="og:description" content="AI-generated diorama miniature art with full prompt included.">
+  <meta property="og:type" content="product">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">Diorama<span>.</span></a>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="globe.html">Globe</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="index.html#about">About</a></li>
+      </ul>
+      <button class="nav__mobile-toggle" aria-label="Menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav__mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="globe.html">Globe</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="index.html#about">About</a>
+  </div>
+
+  <!-- Product Detail (populated dynamically) -->
+  <section class="product" id="product-section">
+    <div class="container">
+      <!-- Loading State -->
+      <div id="product-loading" style="text-align:center;padding:4rem 0;">
+        <p style="color:var(--text-secondary);font-size:1.1rem;">Loading product...</p>
+      </div>
+
+      <!-- Error State (hidden by default) -->
+      <div id="product-error" style="display:none;text-align:center;padding:4rem 0;">
+        <h2 style="margin-bottom:1rem;">Product Not Found</h2>
+        <p style="color:var(--text-secondary);font-size:1.05rem;margin-bottom:2rem;">
+          Sorry, we couldn't find the product you're looking for.
+        </p>
+        <a href="gallery.html" class="btn btn--primary">Browse Gallery</a>
+      </div>
+
+      <!-- Product Content (hidden until loaded) -->
+      <div id="product-content" style="display:none;">
+        <div class="product__grid">
+
+          <!-- Image -->
+          <div class="product__image-wrap reveal">
+            <img id="product-image" src="" alt="">
+            <div class="product__watermark">PREVIEW</div>
+          </div>
+
+          <!-- Info -->
+          <div class="product__info reveal">
+            <p class="product__category" id="product-category"></p>
+            <h1 id="product-title"></h1>
+            <p class="product__description" id="product-description"></p>
+
+            <!-- Prompt File Info -->
+            <div class="product__prompt-preview" id="product-prompt-section">
+              <h4>Prompt File</h4>
+              <p id="product-prompt-file" style="font-style:normal;color:var(--text-secondary);"></p>
+              <p style="color:var(--gold);font-size:0.8rem;margin-top:0.75rem;">Full prompt available after purchase</p>
+            </div>
+
+            <!-- Pricing & Payment -->
+            <div class="product__price-section">
+              <div style="display:flex;align-items:baseline;gap:1rem;margin-bottom:0.3rem;">
+                <div class="product__price">$4.99</div>
+                <span style="color:var(--text-muted);font-size:0.9rem;">USDT</span>
+              </div>
+              <p class="product__price-note">Includes: High-res image + Full prompt</p>
+
+              <div style="display:flex;flex-direction:column;gap:0.75rem;">
+                <a href="payment.html?product=single" class="btn btn--primary" style="width:100%;justify-content:center;" id="buy-now-btn">
+                  Buy Now - $4.99 USDT
+                </a>
+                <div style="display:flex;gap:0.75rem;">
+                  <a href="gallery.html" class="btn btn--outline" style="flex:1;justify-content:center;">View in Gallery</a>
+                  <a href="globe.html" class="btn btn--outline" style="flex:1;justify-content:center;">View on Globe</a>
+                </div>
+              </div>
+
+              <p style="color:var(--text-muted);font-size:0.8rem;margin-top:0.75rem;text-align:center;">Supports Binance Pay / USDT / BTC / ETH</p>
+            </div>
+
+            <!-- Also available in packs -->
+            <div style="margin-top:1.5rem;padding:1.5rem;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-md);">
+              <h4 style="font-family:var(--font-heading);margin-bottom:0.75rem;">Better Deals</h4>
+              <ul style="list-style:none;display:grid;gap:0.75rem;">
+                <li style="display:flex;justify-content:space-between;align-items:center;color:var(--text-secondary);font-size:0.9rem;">
+                  <a href="payment.html?product=university" style="color:var(--text-secondary);">University Pack (5 images)</a>
+                  <span class="gold-text" style="font-weight:600;">$19.99</span>
+                </li>
+                <li style="display:flex;justify-content:space-between;align-items:center;color:var(--text-secondary);font-size:0.9rem;">
+                  <a href="payment.html?product=collection" style="color:var(--text-secondary);">Full Collection (25+ images)</a>
+                  <span class="gold-text" style="font-weight:600;">$49.99</span>
+                </li>
+                <li style="display:flex;justify-content:space-between;align-items:center;color:var(--text-secondary);font-size:0.9rem;">
+                  <a href="payment.html?product=premium" style="color:var(--text-secondary);">Premium (all + updates + video)</a>
+                  <span class="gold-text" style="font-weight:600;">$79.99</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Related Works (populated dynamically) -->
+  <section class="featured" style="padding-top:2rem;" id="related-section">
+    <div class="container">
+      <h2 class="section-title reveal">Related <span class="gold-text">Works</span></h2>
+      <p class="section-subtitle reveal">You might also like these pieces</p>
+      <div class="gallery-grid" id="related-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="nav__logo">Diorama<span>.</span></div>
+          <p>AI-powered city diorama miniature art.</p>
+        </div>
+        <div>
+          <h4>Navigate</h4>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="index.html#pricing">Pricing</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul class="footer__links">
+            <li><a href="mailto:hello@dioramastudio.art">hello@dioramastudio.art</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        &copy; 2026 Diorama Studio. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const productId = params.get('id');
+
+      const loadingEl = document.getElementById('product-loading');
+      const errorEl = document.getElementById('product-error');
+      const contentEl = document.getElementById('product-content');
+      const relatedSection = document.getElementById('related-section');
+
+      // Hide related section until we have data
+      relatedSection.style.display = 'none';
+
+      if (!productId) {
+        showError();
+        return;
+      }
+
+      fetch('data/products.json')
+        .then(function (res) {
+          if (!res.ok) throw new Error('Failed to load products');
+          return res.json();
+        })
+        .then(function (data) {
+          var products = data.products;
+          var product = products.find(function (p) { return p.id === productId; });
+
+          if (!product) {
+            showError();
+            return;
+          }
+
+          populateProduct(product);
+          populateRelated(product, products);
+        })
+        .catch(function () {
+          showError();
+        });
+
+      function showError() {
+        loadingEl.style.display = 'none';
+        errorEl.style.display = 'block';
+        contentEl.style.display = 'none';
+        relatedSection.style.display = 'none';
+      }
+
+      function formatCategory(category) {
+        if (!category) return 'Diorama';
+        return category.charAt(0).toUpperCase() + category.slice(1);
+      }
+
+      function populateProduct(product) {
+        // Update page title and meta
+        document.title = product.name_en + ' | Diorama Studio';
+
+        var ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle) ogTitle.setAttribute('content', product.name_en + ' Diorama | Diorama Studio');
+
+        var metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) metaDesc.setAttribute('content', 'AI-generated ' + product.name_en + ' diorama miniature art - high resolution image with full prompt included.');
+
+        // Populate image
+        var imgEl = document.getElementById('product-image');
+        imgEl.src = product.preview;
+        imgEl.alt = product.name_en + ' Diorama Miniature';
+
+        // Category badge
+        document.getElementById('product-category').textContent = formatCategory(product.category);
+
+        // Title - English name only (with gold accent)
+        var titleEl = document.getElementById('product-title');
+        titleEl.innerHTML = '<span class="gold-text">' + escapeHtml(product.name_en) + '</span>';
+
+        // Description
+        var descEl = document.getElementById('product-description');
+        descEl.textContent = 'A stunning tilt-shift diorama miniature of ' + product.name_en +
+          '. Every detail has been meticulously AI-rendered with warm golden hour lighting and intricate architectural details, creating a captivating miniature world.';
+
+        // Prompt file section
+        var promptSection = document.getElementById('product-prompt-section');
+        var promptFileEl = document.getElementById('product-prompt-file');
+        if (product.prompt_file) {
+          promptSection.style.display = '';
+          // Show only the filename, not its content
+          var fileName = product.prompt_file.split('/').pop();
+          promptFileEl.textContent = 'Included file: ' + fileName;
+        } else {
+          promptSection.style.display = 'none';
+        }
+
+        // Show the content, hide loading
+        loadingEl.style.display = 'none';
+        contentEl.style.display = 'block';
+
+        // Re-init scroll reveal for the newly visible elements
+        initProductReveal();
+      }
+
+      function populateRelated(currentProduct, allProducts) {
+        // Filter same-category products, exclude current
+        var sameCategory = allProducts.filter(function (p) {
+          return p.category === currentProduct.category && p.id !== currentProduct.id;
+        });
+
+        // Shuffle and pick up to 4
+        var shuffled = shuffleArray(sameCategory);
+        var related = shuffled.slice(0, 4);
+
+        // If we don't have enough from same category, fill from other categories
+        if (related.length < 3) {
+          var others = allProducts.filter(function (p) {
+            return p.id !== currentProduct.id && !related.some(function (r) { return r.id === p.id; });
+          });
+          var extraShuffled = shuffleArray(others);
+          while (related.length < 4 && extraShuffled.length > 0) {
+            related.push(extraShuffled.shift());
+          }
+        }
+
+        if (related.length === 0) return;
+
+        var grid = document.getElementById('related-grid');
+        grid.innerHTML = '';
+
+        related.forEach(function (p) {
+          var card = document.createElement('a');
+          card.href = 'product.html?id=' + encodeURIComponent(p.id);
+          card.className = 'card reveal';
+          card.style.textDecoration = 'none';
+          card.innerHTML =
+            '<img class="card__image" src="' + escapeHtml(p.preview) + '" alt="' + escapeHtml(p.name_en) + ' Diorama" loading="lazy">' +
+            '<div class="card__overlay">' +
+              '<span class="card__tag">' + escapeHtml(formatCategory(p.category)) + '</span>' +
+              '<h3 class="card__title">' + escapeHtml(p.name_en) + '</h3>' +
+            '</div>';
+          grid.appendChild(card);
+        });
+
+        relatedSection.style.display = '';
+        initProductReveal();
+      }
+
+      function shuffleArray(arr) {
+        var a = arr.slice();
+        for (var i = a.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = a[i];
+          a[i] = a[j];
+          a[j] = temp;
+        }
+        return a;
+      }
+
+      function escapeHtml(str) {
+        if (!str) return '';
+        var div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      function initProductReveal() {
+        var elements = document.querySelectorAll('.reveal:not(.visible)');
+        if (!elements.length) return;
+
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+        );
+
+        elements.forEach(function (el) { observer.observe(el); });
+      }
+    })();
+  </script>
+</body>
+</html>

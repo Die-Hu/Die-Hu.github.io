@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment | Diorama Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/payment.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav nav--scrolled">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">Diorama<span>.</span></a>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="globe.html">Globe</a></li>
+        <li><a href="index.html#pricing">Pricing</a></li>
+        <li><a href="index.html#about">About</a></li>
+      </ul>
+      <button class="nav__mobile-toggle" aria-label="Menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <div class="payment-container" style="padding-top:80px;">
+    <header class="payment-header">
+      <a href="index.html" class="back-link">&larr; Back to Home</a>
+      <h1>Complete Your Purchase</h1>
+    </header>
+
+    <!-- Step 1: Product Summary -->
+    <section id="product-summary" class="payment-section">
+      <h2>Order Summary</h2>
+      <div class="product-card">
+        <div class="product-name" id="product-name">--</div>
+        <div class="product-price" id="product-price">-- USDT</div>
+        <div class="product-desc" id="product-desc"></div>
+      </div>
+    </section>
+
+    <!-- Step 2: Choose Payment Method -->
+    <section id="payment-methods" class="payment-section">
+      <h2>Select Payment Method</h2>
+      <div class="method-tabs">
+        <button class="method-tab active" data-method="binance">Binance Pay</button>
+        <button class="method-tab" data-method="usdt-trc20">USDT (TRC20)</button>
+        <button class="method-tab" data-method="usdt-erc20">USDT (ERC20)</button>
+        <button class="method-tab" data-method="btc">BTC</button>
+        <button class="method-tab" data-method="eth">ETH</button>
+      </div>
+
+      <!-- Payment Details Panel -->
+      <div class="payment-detail" id="payment-detail">
+        <div class="qr-section">
+          <div class="qr-code" id="qr-code"></div>
+          <p class="qr-hint">Scan with your wallet app</p>
+        </div>
+        <div class="address-section">
+          <label>Payment Address:</label>
+          <div class="address-row">
+            <code class="wallet-address" id="wallet-address">--</code>
+            <button class="copy-btn" id="copy-btn" title="Copy">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <rect x="5" y="5" width="9" height="9" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M3 11V3a1 1 0 011-1h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </div>
+          <div class="copy-feedback" id="copy-feedback">Copied!</div>
+        </div>
+        <div class="amount-section">
+          <label>Amount:</label>
+          <div class="amount-display" id="amount-display">--</div>
+          <p class="network-note" id="network-note"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 3: Payment Timer -->
+    <section id="payment-timer" class="payment-section">
+      <div class="timer-bar">
+        <div class="timer-text">
+          Payment window: <span id="countdown">30:00</span>
+        </div>
+        <div class="timer-progress">
+          <div class="timer-fill" id="timer-fill"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 4: Confirm Payment -->
+    <section id="payment-confirm" class="payment-section">
+      <h2>After Payment</h2>
+      <div class="confirm-instructions">
+        <p>After sending payment, click the button below to confirm. We will verify your transaction and send you the download link within 24 hours.</p>
+      </div>
+      <div class="confirm-actions">
+        <button class="btn-confirm" id="btn-confirm">I've Paid</button>
+      </div>
+    </section>
+
+    <!-- Step 5: Verification Status (shown after clicking confirm) -->
+    <section id="verification-status" class="payment-section hidden">
+      <div class="status-card">
+        <div class="status-steps">
+          <div class="status-step active" data-step="pending">
+            <div class="step-icon">1</div>
+            <div class="step-label">Payment Sent</div>
+          </div>
+          <div class="status-connector"></div>
+          <div class="status-step" data-step="verifying">
+            <div class="step-icon">2</div>
+            <div class="step-label">Verifying</div>
+          </div>
+          <div class="status-connector"></div>
+          <div class="status-step" data-step="complete">
+            <div class="step-icon">3</div>
+            <div class="step-label">Complete</div>
+          </div>
+        </div>
+        <div class="status-message" id="status-message">
+          <p>Please contact us to verify your payment:</p>
+          <div class="contact-options">
+            <a href="mailto:your-email@example.com?subject=Payment%20Verification&body=Order%20ID%3A%20" class="contact-btn email-btn" id="contact-email">
+              Email: your-email@example.com
+            </a>
+            <a href="https://t.me/your_telegram" class="contact-btn tg-btn" id="contact-tg" target="_blank" rel="noopener">
+              Telegram: @your_telegram
+            </a>
+          </div>
+          <p class="note">Include your transaction hash (TXID) and order ID.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="payment-footer">
+      <p>Payments are processed manually. Delivery within 24 hours.</p>
+      <p>Questions? <a href="mailto:your-email@example.com">Contact us</a></p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+  <script src="assets/js/payment-config.js"></script>
+  <script src="assets/js/payment.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

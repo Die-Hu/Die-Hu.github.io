@@ -1,0 +1,11 @@
+# High-res originals (paid product - DO NOT commit)
+assets/images/original/
+*.psd
+*.ai
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Development
+payment-flow.md

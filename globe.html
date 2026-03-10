@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Globe View | Diorama Studio</title>
+  <meta name="description" content="Explore AI-generated city diorama art on an interactive 3D globe. Discover miniature worlds across universities and landscapes worldwide.">
+  <meta property="og:title" content="Globe View | Diorama Studio">
+  <meta property="og:description" content="Explore AI diorama miniature art on an interactive 3D globe.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/images/og-cover.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <style>
+    /* ============================================
+       GLOBE PAGE - Specific Styles
+       ============================================ */
+
+    /* Override body overflow for full-viewport globe */
+    body.globe-page {
+      overflow: hidden;
+      height: 100vh;
+    }
+
+    /* Globe Container */
+    #globe-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: #0a0a0a;
+      z-index: 0;
+    }
+
+    /* Loading Screen */
+    .globe-loading {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      transition: opacity 0.6s ease;
+    }
+
+    .globe-loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .globe-loading__spinner {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--border-subtle);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .globe-loading__text {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* WebGL Fallback */
+    .globe-fallback {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .globe-fallback__icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      opacity: 0.5;
+    }
+
+    .globe-fallback h2 {
+      margin-bottom: 1rem;
+    }
+
+    .globe-fallback p {
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    /* Controls Overlay */
+    .globe-controls {
+      position: fixed;
+      top: 5rem;
+      right: 1.5rem;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      max-width: 200px;
+    }
+
+    .globe-controls__group {
+      background: rgba(22, 22, 22, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.75rem;
+    }
+
+    .globe-controls__label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .globe-controls__filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .globe-filter-btn {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 0.3rem 0.7rem;
+      border-radius: 50px;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .globe-filter-btn:hover {
+      border-color: var(--gold-dark);
+      color: var(--text-primary);
+    }
+
+    .globe-filter-btn.active {
+      background: var(--gold-glow);
+      border-color: var(--gold-dark);
+      color: var(--gold);
+    }
+
+    .globe-controls__btn {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      width: 100%;
+      padding: 0.45rem 0.7rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .globe-controls__btn:hover {
+      border-color: var(--gold-dark);
+      color: var(--text-primary);
+    }
+
+    .globe-controls__btn.active {
+      border-color: var(--gold-dark);
+      color: var(--gold);
+    }
+
+    .globe-controls__btn .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      transition: background var(--transition-fast);
+    }
+
+    .globe-controls__btn.active .status-dot {
+      background: var(--gold);
+      box-shadow: 0 0 6px var(--gold-glow-strong);
+    }
+
+    .globe-zoom-controls {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .globe-zoom-btn {
+      flex: 1;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 0.4rem;
+      border-radius: var(--radius-sm);
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      text-align: center;
+      font-family: var(--font-body);
+    }
+
+    .globe-zoom-btn:hover {
+      border-color: var(--gold-dark);
+      color: var(--text-primary);
+    }
+
+    /* Region dropdown */
+    .globe-region-select {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      padding: 0.4rem 0.6rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23a09a8e'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.6rem center;
+      padding-right: 1.8rem;
+    }
+
+    .globe-region-select:hover,
+    .globe-region-select:focus {
+      border-color: var(--gold-dark);
+      color: var(--text-primary);
+      outline: none;
+    }
+
+    .globe-region-select option {
+      background: var(--bg-card);
+      color: var(--text-primary);
+    }
+
+    /* Info Panel (right slide-in) */
+    .info-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 380px;
+      height: 100vh;
+      z-index: 200;
+      background: rgba(16, 16, 16, 0.92);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-left: 1px solid var(--border-subtle);
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-panel.open {
+      transform: translateX(0);
+    }
+
+    .info-panel__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: all var(--transition-fast);
+      z-index: 10;
+    }
+
+    .info-panel__close:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--gold-dark);
+      color: var(--text-primary);
+    }
+
+    .info-panel__image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .info-panel__content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-panel__category {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      background: var(--gold-glow);
+      padding: 0.25rem 0.7rem;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      width: fit-content;
+    }
+
+    .info-panel__name-cn {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .info-panel__name-en {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .info-panel__region {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .info-panel__region-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold-dark);
+    }
+
+    .info-panel__actions {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding-top: 1.5rem;
+    }
+
+    .info-panel__actions .btn {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Globe marker tooltip */
+    .globe-tooltip {
+      position: absolute;
+      background: rgba(16, 16, 16, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem;
+      pointer-events: none;
+      z-index: 150;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      max-width: 180px;
+    }
+
+    .globe-tooltip.visible {
+      opacity: 1;
+    }
+
+    .globe-tooltip__img {
+      width: 160px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .globe-tooltip__name {
+      font-size: 0.75rem;
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .globe-tooltip__name-en {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    /* Marker count badge */
+    .globe-marker-count {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 1.5rem;
+      z-index: 100;
+      background: rgba(22, 22, 22, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.5rem 1rem;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .globe-marker-count__number {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* Gallery link button */
+    .globe-gallery-link {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 100;
+    }
+
+    /* Adjust nav for globe page */
+    .globe-page .nav {
+      background: rgba(10, 10, 10, 0.7);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    /* Mobile bottom sheet */
+    @media (max-width: 768px) {
+      .globe-controls {
+        top: auto;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        max-width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 0.75rem;
+        background: rgba(16, 16, 16, 0.92);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border-subtle);
+        border-radius: 0;
+        gap: 0.4rem;
+      }
+
+      .globe-controls__group {
+        background: transparent;
+        backdrop-filter: none;
+        border: none;
+        padding: 0.25rem;
+        flex: 1;
+        min-width: 100px;
+      }
+
+      .globe-controls__group:not(:last-child) {
+        border-right: 1px solid var(--border-subtle);
+        padding-right: 0.5rem;
+      }
+
+      .info-panel {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 70vh;
+        max-height: 70vh;
+        transform: translateY(100%);
+        border-left: none;
+        border-top: 1px solid var(--border-subtle);
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      }
+
+      .info-panel.open {
+        transform: translateY(0);
+      }
+
+      .info-panel__image {
+        aspect-ratio: 16/9;
+        max-height: 200px;
+      }
+
+      .globe-marker-count {
+        bottom: auto;
+        top: 5rem;
+        left: 1rem;
+      }
+
+      .globe-gallery-link {
+        bottom: auto;
+        top: 5rem;
+        right: 1rem;
+      }
+
+      .globe-zoom-controls {
+        flex-direction: row;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .info-panel {
+        height: 80vh;
+        max-height: 80vh;
+      }
+    }
+  </style>
+</head>
+<body class="globe-page">
+
+  <!-- Navigation -->
+  <nav class="nav nav--scrolled">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">Diorama<span>.</span></a>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="globe.html" class="active">Globe</a></li>
+        <li><a href="payment.html?product=collection" class="btn btn--primary" style="padding:0.5rem 1.2rem;font-size:0.85rem;">Buy Now</a></li>
+      </ul>
+      <button class="nav__mobile-toggle" aria-label="Menu">&#9776;</button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="nav__mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="globe.html">Globe</a>
+    <a href="payment.html?product=collection">Buy Now</a>
+  </div>
+
+  <!-- Loading Screen -->
+  <div class="globe-loading" id="globe-loading">
+    <div class="globe-loading__spinner"></div>
+    <div class="globe-loading__text">Loading Globe...</div>
+  </div>
+
+  <!-- WebGL Fallback (hidden by default) -->
+  <div class="globe-fallback" id="globe-fallback" style="display:none;">
+    <div class="globe-fallback__icon">&#127758;</div>
+    <h2>WebGL <span class="gold-text">Unavailable</span></h2>
+    <p>Your browser does not support WebGL and cannot display the 3D globe. Please use the gallery to browse artworks.</p>
+    <a href="gallery.html" class="btn btn--primary">Browse Gallery</a>
+  </div>
+
+  <!-- Globe Container -->
+  <div id="globe-container"></div>
+
+  <!-- Tooltip (follows cursor) -->
+  <div class="globe-tooltip" id="globe-tooltip">
+    <img class="globe-tooltip__img" src="" alt="">
+    <div class="globe-tooltip__name"></div>
+    <div class="globe-tooltip__name-en"></div>
+  </div>
+
+  <!-- Controls Overlay -->
+  <div class="globe-controls" id="globe-controls" style="display:none;">
+    <!-- Category Filter -->
+    <div class="globe-controls__group">
+      <span class="globe-controls__label">Category</span>
+      <div class="globe-controls__filters" id="category-filters">
+        <button class="globe-filter-btn active" data-category="all">All</button>
+        <button class="globe-filter-btn" data-category="university">University</button>
+        <button class="globe-filter-btn" data-category="nature">Nature</button>
+      </div>
+    </div>
+
+    <!-- Region Filter -->
+    <div class="globe-controls__group">
+      <span class="globe-controls__label">Region</span>
+      <select class="globe-region-select" id="region-filter">
+        <option value="all">All Regions</option>
+        <option value="ivy">Ivy League</option>
+        <option value="us-east">US East</option>
+        <option value="us-west">US West</option>
+        <option value="us-other">US Other</option>
+        <option value="canada">Canada</option>
+        <option value="uk">UK</option>
+        <option value="europe">Europe</option>
+        <option value="asia-east">East Asia</option>
+        <option value="asia-se">Southeast Asia</option>
+        <option value="oceania">Oceania</option>
+        <option value="nature">Nature</option>
+      </select>
+    </div>
+
+    <!-- Auto-rotate Toggle -->
+    <div class="globe-controls__group">
+      <button class="globe-controls__btn active" id="auto-rotate-btn">
+        <span>Auto-rotate</span>
+        <span class="status-dot"></span>
+      </button>
+    </div>
+
+    <!-- Zoom Controls -->
+    <div class="globe-controls__group">
+      <span class="globe-controls__label">Zoom</span>
+      <div class="globe-zoom-controls">
+        <button class="globe-zoom-btn" id="zoom-in-btn">+</button>
+        <button class="globe-zoom-btn" id="zoom-out-btn">&minus;</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Marker Count -->
+  <div class="globe-marker-count" id="marker-count" style="display:none;">
+    <span class="globe-marker-count__number" id="marker-count-num">0</span> markers
+  </div>
+
+  <!-- Gallery Link -->
+  <div class="globe-gallery-link" id="gallery-link" style="display:none;">
+    <a href="gallery.html" class="btn btn--outline" style="font-size:0.8rem;padding:0.5rem 1rem;">
+      Gallery View
+    </a>
+  </div>
+
+  <!-- Info Panel (slide-in from right) -->
+  <div class="info-panel" id="info-panel">
+    <button class="info-panel__close" id="info-panel-close" aria-label="Close">&times;</button>
+    <img class="info-panel__image" id="panel-image" src="" alt="">
+    <div class="info-panel__content">
+      <span class="info-panel__category" id="panel-category"></span>
+      <div class="info-panel__name-cn" id="panel-name-cn"></div>
+      <div class="info-panel__name-en" id="panel-name-en"></div>
+      <div class="info-panel__region" id="panel-region">
+        <span class="info-panel__region-dot"></span>
+        <span id="panel-region-text"></span>
+      </div>
+      <div class="info-panel__actions">
+        <a href="#" class="btn btn--primary" id="panel-details-btn">View Details</a>
+        <a href="payment.html?product=single" class="btn btn--outline" id="panel-buy-btn">Buy Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer (minimal, hidden on desktop for immersive experience) -->
+
+  <script src="https://unpkg.com/globe.gl"></script>
+  <script src="assets/js/main.js"></script>
+  <script>
+  (function() {
+    'use strict';
+
+    // =============================================
+    // WebGL Detection
+    // =============================================
+    function hasWebGL() {
+      try {
+        var canvas = document.createElement('canvas');
+        return !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
+      } catch (e) {
+        return false;
+      }
+    }
+
+    if (!hasWebGL()) {
+      document.getElementById('globe-loading').style.display = 'none';
+      document.getElementById('globe-fallback').style.display = 'flex';
+      return;
+    }
+
+    // =============================================
+    // State
+    // =============================================
+    var allPoints = [];
+    var filteredPoints = [];
+    var activeCategory = 'all';
+    var activeRegion = 'all';
+    var autoRotateEnabled = true;
+    var globe = null;
+    var tooltipEl = document.getElementById('globe-tooltip');
+    var currentHoveredPoint = null;
+
+    // Region display names
+    var regionNames = {
+      'ivy': 'Ivy League',
+      'us-east': 'US East',
+      'us-west': 'US West',
+      'us-other': 'US Other',
+      'canada': 'Canada',
+      'uk': 'UK',
+      'europe': 'Europe',
+      'asia-east': 'East Asia',
+      'asia-se': 'Southeast Asia',
+      'oceania': 'Oceania',
+      'nature': 'Nature'
+    };
+
+    // Category display names
+    var categoryNames = {
+      'university': 'University',
+      'nature': 'Nature'
+    };
+
+    // =============================================
+    // Data Loading
+    // =============================================
+    function loadData() {
+      return fetch('data/globe-points.json')
+        .then(function(res) {
+          if (!res.ok) throw new Error('Failed to load globe-points.json');
+          return res.json();
+        })
+        .then(function(data) {
+          allPoints = data.points || [];
+          filteredPoints = allPoints.slice();
+          return allPoints;
+        })
+        .catch(function(err) {
+          console.warn('globe-points.json not found, using fallback data:', err.message);
+          allPoints = getFallbackData();
+          filteredPoints = allPoints.slice();
+          return allPoints;
+        });
+    }
+
+    // Fallback data if globe-points.json not yet created
+    function getFallbackData() {
+      return [
+        { id: 'mit', lat: 42.3601, lng: -71.0942, name_cn: 'MIT', name_en: 'MIT', category: 'university', region: 'ivy', preview: 'assets/images/preview/mit-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/mit-diorama-thumb.jpg', productUrl: 'product.html?id=mit' },
+        { id: 'harvard', lat: 42.3770, lng: -71.1167, name_cn: 'Harvard University', name_en: 'Harvard University', category: 'university', region: 'ivy', preview: 'assets/images/preview/harvard-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/harvard-diorama-thumb.jpg', productUrl: 'product.html?id=harvard' },
+        { id: 'stanford', lat: 37.4275, lng: -122.1697, name_cn: 'Stanford University', name_en: 'Stanford University', category: 'university', region: 'us-west', preview: 'assets/images/preview/stanford-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/stanford-diorama-thumb.jpg', productUrl: 'product.html?id=stanford' },
+        { id: 'caltech', lat: 34.1377, lng: -118.1253, name_cn: 'Caltech', name_en: 'Caltech', category: 'university', region: 'us-west', preview: 'assets/images/preview/caltech-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/caltech-diorama-thumb.jpg', productUrl: 'product.html?id=caltech' },
+        { id: 'berkeley', lat: 37.8719, lng: -122.2585, name_cn: 'UC Berkeley', name_en: 'UC Berkeley', category: 'university', region: 'us-west', preview: 'assets/images/preview/berkeley-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/berkeley-diorama-thumb.jpg', productUrl: 'product.html?id=berkeley' },
+        { id: 'cornell', lat: 42.4534, lng: -76.4735, name_cn: 'Cornell University', name_en: 'Cornell University', category: 'university', region: 'ivy', preview: 'assets/images/preview/cornell-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/cornell-diorama-thumb.jpg', productUrl: 'product.html?id=cornell' },
+        { id: 'upenn', lat: 39.9522, lng: -75.1932, name_cn: 'University of Pennsylvania', name_en: 'University of Pennsylvania', category: 'university', region: 'ivy', preview: 'assets/images/preview/upenn-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/upenn-diorama-thumb.jpg', productUrl: 'product.html?id=upenn' },
+        { id: 'columbia', lat: 40.8075, lng: -73.9626, name_cn: 'Columbia University', name_en: 'Columbia University', category: 'university', region: 'ivy', preview: 'assets/images/preview/columbia-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/columbia-diorama-thumb.jpg', productUrl: 'product.html?id=columbia' },
+        { id: 'uchicago', lat: 41.7886, lng: -87.5987, name_cn: 'University of Chicago', name_en: 'University of Chicago', category: 'university', region: 'us-east', preview: 'assets/images/preview/uchicago-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/uchicago-diorama-thumb.jpg', productUrl: 'product.html?id=uchicago' },
+        { id: 'oxford', lat: 51.7548, lng: -1.2544, name_cn: 'University of Oxford', name_en: 'University of Oxford', category: 'university', region: 'uk', preview: 'assets/images/preview/oxford-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/oxford-diorama-thumb.jpg', productUrl: 'product.html?id=oxford' },
+        { id: 'cambridge', lat: 52.2043, lng: 0.1218, name_cn: 'University of Cambridge', name_en: 'University of Cambridge', category: 'university', region: 'uk', preview: 'assets/images/preview/cambridge-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/cambridge-diorama-thumb.jpg', productUrl: 'product.html?id=cambridge' },
+        { id: 'ucl', lat: 51.5246, lng: -0.1340, name_cn: 'UCL', name_en: 'UCL', category: 'university', region: 'uk', preview: 'assets/images/preview/ucl-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/ucl-diorama-thumb.jpg', productUrl: 'product.html?id=ucl' },
+        { id: 'imperial', lat: 51.4988, lng: -0.1749, name_cn: 'Imperial College London', name_en: 'Imperial College London', category: 'university', region: 'uk', preview: 'assets/images/preview/imperial-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/imperial-diorama-thumb.jpg', productUrl: 'product.html?id=imperial' },
+        { id: 'eth-zurich', lat: 47.3763, lng: 8.5480, name_cn: 'ETH Zurich', name_en: 'ETH Zurich', category: 'university', region: 'europe', preview: 'assets/images/preview/eth-zurich-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/eth-zurich-diorama-thumb.jpg', productUrl: 'product.html?id=eth-zurich' },
+        { id: 'tsinghua', lat: 40.0003, lng: 116.3267, name_cn: 'Tsinghua University', name_en: 'Tsinghua University', category: 'university', region: 'asia-east', preview: 'assets/images/preview/tsinghua-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/tsinghua-diorama-thumb.jpg', productUrl: 'product.html?id=tsinghua' },
+        { id: 'peking', lat: 39.9929, lng: 116.3106, name_cn: 'Peking University', name_en: 'Peking University', category: 'university', region: 'asia-east', preview: 'assets/images/preview/peking-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/peking-diorama-thumb.jpg', productUrl: 'product.html?id=peking' },
+        { id: 'nus', lat: 1.2966, lng: 103.7764, name_cn: 'National University of Singapore', name_en: 'National University of Singapore', category: 'university', region: 'asia-se', preview: 'assets/images/preview/nus-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/nus-diorama-thumb.jpg', productUrl: 'product.html?id=nus' },
+        { id: 'ntu', lat: 1.3483, lng: 103.6831, name_cn: 'Nanyang Technological University', name_en: 'Nanyang Technological University', category: 'university', region: 'asia-se', preview: 'assets/images/preview/ntu-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/ntu-diorama-thumb.jpg', productUrl: 'product.html?id=ntu' },
+        { id: 'hku', lat: 22.2830, lng: 114.1370, name_cn: 'University of Hong Kong', name_en: 'University of Hong Kong', category: 'university', region: 'asia-east', preview: 'assets/images/preview/hku-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/hku-diorama-thumb.jpg', productUrl: 'product.html?id=hku' },
+        { id: 'melbourne', lat: -37.7964, lng: 144.9612, name_cn: 'University of Melbourne', name_en: 'University of Melbourne', category: 'university', region: 'oceania', preview: 'assets/images/preview/melbourne-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/melbourne-diorama-thumb.jpg', productUrl: 'product.html?id=melbourne' },
+        { id: 'unsw', lat: -33.9173, lng: 151.2313, name_cn: 'UNSW Sydney', name_en: 'UNSW Sydney', category: 'university', region: 'oceania', preview: 'assets/images/preview/unsw-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/unsw-diorama-thumb.jpg', productUrl: 'product.html?id=unsw' },
+        { id: 'ucsb', lat: 34.4140, lng: -119.8489, name_cn: 'UC Santa Barbara', name_en: 'UC Santa Barbara', category: 'university', region: 'us-west', preview: 'assets/images/preview/ucsb-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/ucsb-diorama-thumb.jpg', productUrl: 'product.html?id=ucsb' },
+        { id: 'uncc', lat: 35.3076, lng: -80.7335, name_cn: 'UNC Charlotte', name_en: 'UNC Charlotte', category: 'university', region: 'us-east', preview: 'assets/images/preview/uncc-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/uncc-diorama-thumb.jpg', productUrl: 'product.html?id=uncc' },
+        { id: 'yosemite', lat: 37.8651, lng: -119.5383, name_cn: 'Yosemite National Park', name_en: 'Yosemite National Park', category: 'nature', region: 'nature', preview: 'assets/images/preview/yosemite-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/yosemite-diorama-thumb.jpg', productUrl: 'product.html?id=yosemite' },
+        { id: 'sequoia', lat: 36.4864, lng: -118.5658, name_cn: 'Sequoia National Park', name_en: 'Sequoia National Park', category: 'nature', region: 'nature', preview: 'assets/images/preview/sequoia-diorama-preview.jpg', thumbnail: 'assets/images/thumbnails/sequoia-diorama-thumb.jpg', productUrl: 'product.html?id=sequoia' }
+      ];
+    }
+
+    // =============================================
+    // Filter Logic
+    // =============================================
+    function applyFilters() {
+      filteredPoints = allPoints.filter(function(p) {
+        var catMatch = activeCategory === 'all' || p.category === activeCategory;
+        var regMatch = activeRegion === 'all' || p.region === activeRegion;
+        return catMatch && regMatch;
+      });
+
+      updateGlobePoints();
+      updateMarkerCount();
+    }
+
+    function updateMarkerCount() {
+      var countEl = document.getElementById('marker-count-num');
+      if (countEl) countEl.textContent = filteredPoints.length;
+    }
+
+    // =============================================
+    // Globe Initialization
+    // =============================================
+    function initGlobe(points) {
+      var container = document.getElementById('globe-container');
+
+      globe = Globe()
+        .globeImageUrl('//unpkg.com/three-globe/example/img/earth-night.jpg')
+        .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+        .backgroundColor('#0a0a0a')
+        .pointsData(filteredPoints)
+        .pointLat('lat')
+        .pointLng('lng')
+        .pointColor(function() { return '#c8a96e'; })
+        .pointAltitude(0.01)
+        .pointRadius(0.4)
+        .pointsMerge(false)
+        .onPointHover(handlePointHover)
+        .onPointClick(handlePointClick)
+        .onGlobeClick(handleGlobeClick)
+        .atmosphereColor('#c8a96e')
+        .atmosphereAltitude(0.15)
+        (container);
+
+      // Auto-rotate
+      var controls = globe.controls();
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 0.5;
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.1;
+      controls.minDistance = 120;
+      controls.maxDistance = 500;
+
+      // Pause auto-rotate on drag
+      controls.addEventListener('start', function() {
+        if (autoRotateEnabled) {
+          controls.autoRotate = false;
+        }
+      });
+
+      controls.addEventListener('end', function() {
+        if (autoRotateEnabled) {
+          // Resume after a short delay
+          setTimeout(function() {
+            if (autoRotateEnabled) controls.autoRotate = true;
+          }, 2000);
+        }
+      });
+
+      // Set initial point of view (slightly zoomed out to show globe)
+      globe.pointOfView({ lat: 30, lng: 0, altitude: 2.5 });
+
+      // Hide loading screen
+      setTimeout(function() {
+        var loading = document.getElementById('globe-loading');
+        loading.classList.add('hidden');
+        setTimeout(function() { loading.style.display = 'none'; }, 600);
+
+        // Show controls
+        document.getElementById('globe-controls').style.display = '';
+        document.getElementById('marker-count').style.display = '';
+        document.getElementById('gallery-link').style.display = '';
+        updateMarkerCount();
+      }, 800);
+
+      // Handle resize
+      window.addEventListener('resize', function() {
+        globe.width(window.innerWidth);
+        globe.height(window.innerHeight);
+      });
+    }
+
+    // =============================================
+    // Update Globe Points
+    // =============================================
+    function updateGlobePoints() {
+      if (!globe) return;
+      globe.pointsData(filteredPoints);
+    }
+
+    // =============================================
+    // Hover Handler
+    // =============================================
+    var thumbnailCache = {};
+
+    function preloadThumbnail(url) {
+      if (thumbnailCache[url]) return;
+      var img = new Image();
+      img.src = url;
+      thumbnailCache[url] = img;
+    }
+
+    function handlePointHover(point, prevPoint) {
+      currentHoveredPoint = point;
+
+      if (point) {
+        // Preload thumbnail lazily
+        preloadThumbnail(point.thumbnail);
+
+        // Scale up hovered point
+        globe
+          .pointRadius(function(d) { return d === point ? 0.7 : 0.4; })
+          .pointAltitude(function(d) { return d === point ? 0.04 : 0.01; })
+          .pointColor(function(d) { return d === point ? '#e0c98f' : '#c8a96e'; });
+
+        // Change cursor
+        document.getElementById('globe-container').style.cursor = 'pointer';
+      } else {
+        globe
+          .pointRadius(0.4)
+          .pointAltitude(0.01)
+          .pointColor(function() { return '#c8a96e'; });
+
+        document.getElementById('globe-container').style.cursor = 'grab';
+        hideTooltip();
+      }
+    }
+
+    // Tooltip follows mouse
+    document.addEventListener('mousemove', function(e) {
+      if (!currentHoveredPoint) {
+        hideTooltip();
+        return;
+      }
+
+      var tooltip = tooltipEl;
+      var tooltipImg = tooltip.querySelector('.globe-tooltip__img');
+      var tooltipName = tooltip.querySelector('.globe-tooltip__name');
+      var tooltipNameEn = tooltip.querySelector('.globe-tooltip__name-en');
+
+      tooltipImg.src = currentHoveredPoint.thumbnail;
+      tooltipImg.alt = currentHoveredPoint.name_en;
+      tooltipName.textContent = currentHoveredPoint.name_cn;
+      tooltipNameEn.textContent = currentHoveredPoint.name_en;
+
+      // Position tooltip
+      var x = e.clientX + 16;
+      var y = e.clientY - 16;
+
+      // Keep tooltip on screen
+      var tw = 192; // approximate tooltip width
+      var th = 150; // approximate tooltip height
+      if (x + tw > window.innerWidth) x = e.clientX - tw - 16;
+      if (y + th > window.innerHeight) y = window.innerHeight - th - 8;
+      if (y < 0) y = 8;
+
+      tooltip.style.left = x + 'px';
+      tooltip.style.top = y + 'px';
+      tooltip.classList.add('visible');
+    });
+
+    function hideTooltip() {
+      tooltipEl.classList.remove('visible');
+    }
+
+    // =============================================
+    // Click Handler
+    // =============================================
+    function handlePointClick(point) {
+      if (!point) return;
+
+      hideTooltip();
+
+      // Fly to the location
+      globe.pointOfView(
+        { lat: point.lat, lng: point.lng, altitude: 1.5 },
+        1000
+      );
+
+      // Show info panel
+      showInfoPanel(point);
+    }
+
+    function handleGlobeClick() {
+      hideInfoPanel();
+    }
+
+    // =============================================
+    // Info Panel
+    // =============================================
+    var infoPanel = document.getElementById('info-panel');
+
+    function showInfoPanel(point) {
+      var panelImage = document.getElementById('panel-image');
+      var panelCategory = document.getElementById('panel-category');
+      var panelNameCn = document.getElementById('panel-name-cn');
+      var panelNameEn = document.getElementById('panel-name-en');
+      var panelRegionText = document.getElementById('panel-region-text');
+      var panelDetailsBtn = document.getElementById('panel-details-btn');
+      var panelBuyBtn = document.getElementById('panel-buy-btn');
+
+      panelImage.src = point.preview;
+      panelImage.alt = point.name_en;
+      panelCategory.textContent = categoryNames[point.category] || point.category;
+      panelNameCn.textContent = point.name_cn;
+      panelNameEn.textContent = point.name_en;
+      panelRegionText.textContent = regionNames[point.region] || point.region;
+      panelDetailsBtn.href = point.productUrl || ('product.html?id=' + point.id);
+      panelBuyBtn.href = 'payment.html?product=single';
+
+      infoPanel.classList.add('open');
+    }
+
+    function hideInfoPanel() {
+      infoPanel.classList.remove('open');
+    }
+
+    // Close panel button
+    document.getElementById('info-panel-close').addEventListener('click', function(e) {
+      e.stopPropagation();
+      hideInfoPanel();
+    });
+
+    // ESC to close panel and resume auto-rotate
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        hideInfoPanel();
+        if (autoRotateEnabled && globe) {
+          globe.controls().autoRotate = true;
+        }
+      }
+    });
+
+    // =============================================
+    // Control Bindings
+    // =============================================
+
+    // Category filter buttons
+    document.getElementById('category-filters').addEventListener('click', function(e) {
+      var btn = e.target.closest('.globe-filter-btn');
+      if (!btn) return;
+
+      var category = btn.dataset.category;
+      activeCategory = category;
+
+      // Update active state
+      this.querySelectorAll('.globe-filter-btn').forEach(function(b) {
+        b.classList.remove('active');
+      });
+      btn.classList.add('active');
+
+      applyFilters();
+    });
+
+    // Region filter dropdown
+    document.getElementById('region-filter').addEventListener('change', function() {
+      activeRegion = this.value;
+      applyFilters();
+    });
+
+    // Auto-rotate toggle
+    document.getElementById('auto-rotate-btn').addEventListener('click', function() {
+      autoRotateEnabled = !autoRotateEnabled;
+      this.classList.toggle('active', autoRotateEnabled);
+
+      if (globe) {
+        globe.controls().autoRotate = autoRotateEnabled;
+      }
+    });
+
+    // Zoom controls
+    document.getElementById('zoom-in-btn').addEventListener('click', function() {
+      if (!globe) return;
+      var pov = globe.pointOfView();
+      var newAlt = Math.max(0.5, pov.altitude * 0.7);
+      globe.pointOfView({ altitude: newAlt }, 400);
+    });
+
+    document.getElementById('zoom-out-btn').addEventListener('click', function() {
+      if (!globe) return;
+      var pov = globe.pointOfView();
+      var newAlt = Math.min(5, pov.altitude * 1.4);
+      globe.pointOfView({ altitude: newAlt }, 400);
+    });
+
+    // =============================================
+    // Touch support - hide tooltip on touch devices
+    // =============================================
+    var isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    if (isTouchDevice) {
+      tooltipEl.style.display = 'none';
+    }
+
+    // =============================================
+    // Initialize
+    // =============================================
+    loadData().then(function(points) {
+      initGlobe(points);
+    });
+
+  })();
+  </script>
+</body>
+</html>
