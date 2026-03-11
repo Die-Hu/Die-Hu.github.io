@@ -559,6 +559,156 @@
       "prompt_file": "prompts/zion.txt",
       "preview": "assets/images/preview/zion-diorama-preview.jpg",
       "thumbnail": "assets/images/thumbnails/zion-diorama-thumb.jpg"
+    },
+    {
+      "id": "acadia",
+      "name_en": "Acadia National Park",
+      "name_cn": "阿卡迪亚国家公园",
+      "category": "nature",
+      "source_image": "acadia-diorama.png",
+      "prompt_file": "prompts/acadia.txt",
+      "preview": "assets/images/preview/acadia-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/acadia-diorama-thumb.jpg"
+    },
+    {
+      "id": "grand-teton",
+      "name_en": "Grand Teton National Park",
+      "name_cn": "大提顿国家公园",
+      "category": "nature",
+      "source_image": "grand-teton-diorama.png",
+      "prompt_file": "prompts/grand-teton.txt",
+      "preview": "assets/images/preview/grand-teton-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/grand-teton-diorama-thumb.jpg"
+    },
+    {
+      "id": "joshua-tree",
+      "name_en": "Joshua Tree National Park",
+      "name_cn": "约书亚树国家公园",
+      "category": "nature",
+      "source_image": "joshua-tree-diorama.png",
+      "prompt_file": "prompts/joshua-tree.txt",
+      "preview": "assets/images/preview/joshua-tree-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/joshua-tree-diorama-thumb.jpg"
+    },
+    {
+      "id": "bryce-canyon",
+      "name_en": "Bryce Canyon National Park",
+      "name_cn": "布莱斯峡谷国家公园",
+      "category": "nature",
+      "source_image": "bryce-canyon-diorama.png",
+      "prompt_file": "prompts/bryce-canyon.txt",
+      "preview": "assets/images/preview/bryce-canyon-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/bryce-canyon-diorama-thumb.jpg"
+    },
+    {
+      "id": "arches",
+      "name_en": "Arches National Park",
+      "name_cn": "拱门国家公园",
+      "category": "nature",
+      "source_image": "arches-diorama.png",
+      "prompt_file": "prompts/arches.txt",
+      "preview": "assets/images/preview/arches-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/arches-diorama-thumb.jpg"
+    },
+    {
+      "id": "duke",
+      "name_en": "Duke University",
+      "name_cn": "杜克大学",
+      "category": "university",
+      "source_image": "duke-diorama.png",
+      "prompt_file": "prompts/duke.txt",
+      "preview": "assets/images/preview/duke-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/duke-diorama-thumb.jpg"
+    },
+    {
+      "id": "brown",
+      "name_en": "Brown University",
+      "name_cn": "布朗大学",
+      "category": "university",
+      "source_image": "brown-diorama.png",
+      "prompt_file": "prompts/brown.txt",
+      "preview": "assets/images/preview/brown-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/brown-diorama-thumb.jpg"
+    },
+    {
+      "id": "heidelberg",
+      "name_en": "University of Heidelberg",
+      "name_cn": "海德堡大学",
+      "category": "university",
+      "source_image": "heidelberg-diorama.png",
+      "prompt_file": "prompts/heidelberg.txt",
+      "preview": "assets/images/preview/heidelberg-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/heidelberg-diorama-thumb.jpg"
+    },
+    {
+      "id": "uw",
+      "name_en": "University of Washington",
+      "name_cn": "华盛顿大学",
+      "category": "university",
+      "source_image": "uw-diorama.png",
+      "prompt_file": "prompts/uw.txt",
+      "preview": "assets/images/preview/uw-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/uw-diorama-thumb.jpg"
+    },
+    {
+      "id": "osaka",
+      "name_en": "Osaka University",
+      "name_cn": "大阪大学",
+      "category": "university",
+      "source_image": "osaka-diorama.png",
+      "prompt_file": "prompts/osaka.txt",
+      "preview": "assets/images/preview/osaka-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/osaka-diorama-thumb.jpg"
+    },
+    {
+      "id": "postech",
+      "name_en": "POSTECH",
+      "name_cn": "浦项科技大学",
+      "category": "university",
+      "source_image": "postech-diorama.png",
+      "prompt_file": "prompts/postech.txt",
+      "preview": "assets/images/preview/postech-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/postech-diorama-thumb.jpg"
+    },
+    {
+      "id": "gatech",
+      "name_en": "Georgia Institute of Technology",
+      "name_cn": "佐治亚理工学院",
+      "category": "university",
+      "source_image": "gatech-diorama.png",
+      "prompt_file": "prompts/gatech.txt",
+      "preview": "assets/images/preview/gatech-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/gatech-diorama-thumb.jpg"
+    },
+    {
+      "id": "rice",
+      "name_en": "Rice University",
+      "name_cn": "莱斯大学",
+      "category": "university",
+      "source_image": "rice-diorama.png",
+      "prompt_file": "prompts/rice.txt",
+      "preview": "assets/images/preview/rice-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/rice-diorama-thumb.jpg"
+    },
+    {
+      "id": "waseda",
+      "name_en": "Waseda University",
+      "name_cn": "早稻田大学",
+      "category": "university",
+      "source_image": "waseda-diorama.png",
+      "prompt_file": "prompts/waseda.txt",
+      "preview": "assets/images/preview/waseda-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/waseda-diorama-thumb.jpg"
+    },
+    {
+      "id": "ucsd",
+      "name_en": "UC San Diego",
+      "name_cn": "加州大学圣迭戈分校",
+      "category": "university",
+      "source_image": "ucsd-diorama.png",
+      "prompt_file": "prompts/ucsd.txt",
+      "preview": "assets/images/preview/ucsd-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/ucsd-diorama-thumb.jpg"
     }
   ],
   "total": 51
