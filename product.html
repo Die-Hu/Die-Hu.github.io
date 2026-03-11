@@ -4,11 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product | Diorama Studio</title>
-  <meta name="description" content="AI-generated diorama miniature art - high resolution image with full prompt included.">
-  <meta property="og:title" content="Diorama | Diorama Studio">
-  <meta property="og:description" content="AI-generated diorama miniature art with full prompt included.">
+  <meta name="description" content="AI-generated diorama miniature art - high resolution image with full prompt included. Buy with crypto.">
+  <meta name="keywords" content="diorama art, AI miniature, tilt-shift art, digital download, university diorama, AI prompt, high resolution art">
+  <link rel="canonical" href="https://die-hu.github.io/product.html">
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <meta property="og:title" content="Diorama Art | Diorama Studio">
+  <meta property="og:description" content="AI-generated diorama miniature art with full prompt included. High resolution digital download.">
   <meta property="og:type" content="product">
+  <meta property="og:url" content="https://die-hu.github.io/product.html">
+  <meta property="og:image" content="https://die-hu.github.io/assets/images/og-cover.jpg">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Diorama Art | Diorama Studio">
+  <meta name="twitter:description" content="AI-generated diorama miniature art with full prompt included.">
+  <meta name="theme-color" content="#0a0a0a">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -33,6 +41,7 @@
 
   <!-- Mobile Menu -->
   <div class="nav__mobile-menu">
+    <button class="nav__mobile-close" aria-label="Close menu">&times;</button>
     <a href="index.html">Home</a>
     <a href="gallery.html">Gallery</a>
     <a href="globe.html">Globe</a>
@@ -43,6 +52,15 @@
   <!-- Product Detail (populated dynamically) -->
   <section class="product" id="product-section">
     <div class="container">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" id="product-breadcrumb" style="display:none;">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb__sep">&rsaquo;</span>
+        <a href="gallery.html">Gallery</a>
+        <span class="breadcrumb__sep">&rsaquo;</span>
+        <span class="breadcrumb__current" id="breadcrumb-name"></span>
+      </nav>
+
       <!-- Loading State -->
       <div id="product-loading" style="text-align:center;padding:4rem 0;">
         <p style="color:var(--text-secondary);font-size:1.1rem;">Loading product...</p>
@@ -101,6 +119,14 @@
               <p style="color:var(--text-muted);font-size:0.8rem;margin-top:0.75rem;text-align:center;">Supports Binance Pay / USDT / BTC / ETH</p>
             </div>
 
+            <!-- Share Button -->
+            <div style="margin-top:1rem;">
+              <button class="product__share-btn" id="share-btn" type="button">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9.5l4-3M6 6.5l4 3"/><circle cx="4" cy="8" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="12" cy="11" r="2"/></svg>
+                Share
+              </button>
+            </div>
+
             <!-- Also available in packs -->
             <div style="margin-top:1.5rem;padding:1.5rem;background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-md);">
               <h4 style="font-family:var(--font-heading);margin-bottom:0.75rem;">Better Deals</h4>
@@ -141,25 +167,30 @@
       <div class="footer__grid">
         <div class="footer__brand">
           <div class="nav__logo">Diorama<span>.</span></div>
-          <p>AI-powered city diorama miniature art.</p>
+          <p>AI-powered city diorama miniature art. Redefining visual aesthetics through technology.</p>
         </div>
         <div>
           <h4>Navigate</h4>
           <ul class="footer__links">
             <li><a href="index.html">Home</a></li>
             <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="globe.html">Globe</a></li>
             <li><a href="index.html#pricing">Pricing</a></li>
+            <li><a href="index.html#about">About</a></li>
           </ul>
         </div>
         <div>
-          <h4>Contact</h4>
+          <h4>Collections</h4>
           <ul class="footer__links">
-            <li><a href="mailto:hello@dioramastudio.art">hello@dioramastudio.art</a></li>
+            <li><a href="gallery.html?filter=ivy">Ivy League</a></li>
+            <li><a href="gallery.html?filter=uk">UK Universities</a></li>
+            <li><a href="gallery.html?filter=asia">Asian Universities</a></li>
+            <li><a href="gallery.html?filter=nature">Nature</a></li>
           </ul>
         </div>
       </div>
       <div class="footer__bottom">
-        &copy; 2026 Diorama Studio. All rights reserved.
+        &copy; 2026 Diorama Studio. All rights reserved. | Powered by AI
       </div>
     </div>
   </footer>
@@ -255,12 +286,65 @@
           promptSection.style.display = 'none';
         }
 
+        // Breadcrumb
+        var breadcrumbEl = document.getElementById('product-breadcrumb');
+        var breadcrumbName = document.getElementById('breadcrumb-name');
+        if (breadcrumbEl && breadcrumbName) {
+          breadcrumbName.textContent = product.name_en;
+          breadcrumbEl.style.display = '';
+        }
+
+        // Share button
+        var shareBtn = document.getElementById('share-btn');
+        if (shareBtn) {
+          shareBtn.addEventListener('click', function () {
+            var url = window.location.href;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(url).then(function () {
+                shareBtn.classList.add('copied');
+                shareBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l4 4 6-8"/></svg> Copied!';
+                setTimeout(function () {
+                  shareBtn.classList.remove('copied');
+                  shareBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9.5l4-3M6 6.5l4 3"/><circle cx="4" cy="8" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="12" cy="11" r="2"/></svg> Share';
+                }, 2000);
+              });
+            } else {
+              // Fallback
+              var tmp = document.createElement('textarea');
+              tmp.value = url;
+              document.body.appendChild(tmp);
+              tmp.select();
+              document.execCommand('copy');
+              document.body.removeChild(tmp);
+              shareBtn.textContent = 'Copied!';
+              setTimeout(function () { shareBtn.textContent = 'Share'; }, 2000);
+            }
+          });
+        }
+
         // Show the content, hide loading
         loadingEl.style.display = 'none';
         contentEl.style.display = 'block';
 
         // Re-init scroll reveal for the newly visible elements
         initProductReveal();
+
+        // Inject structured data for this product
+        injectProductSchema(product);
+
+        // Update canonical URL and OG URL for this specific product
+        var canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) canonical.setAttribute('href', 'https://die-hu.github.io/product.html?id=' + product.id);
+        var ogUrl = document.querySelector('meta[property="og:url"]');
+        if (ogUrl) ogUrl.setAttribute('content', 'https://die-hu.github.io/product.html?id=' + product.id);
+        var ogImage = document.querySelector('meta[property="og:image"]');
+        if (ogImage) ogImage.setAttribute('content', 'https://die-hu.github.io/' + product.preview);
+        var ogDesc = document.querySelector('meta[property="og:description"]');
+        if (ogDesc) ogDesc.setAttribute('content', 'AI-generated ' + product.name_en + ' diorama miniature art. High resolution with full prompt.');
+        var twTitle = document.querySelector('meta[name="twitter:title"]');
+        if (twTitle) twTitle.setAttribute('content', product.name_en + ' Diorama | Diorama Studio');
+        var twDesc = document.querySelector('meta[name="twitter:description"]');
+        if (twDesc) twDesc.setAttribute('content', 'AI-generated ' + product.name_en + ' diorama miniature art with full prompt included.');
       }
 
       function populateRelated(currentProduct, allProducts) {
@@ -343,6 +427,35 @@
 
         elements.forEach(function (el) { observer.observe(el); });
       }
+
+      // Inject Product structured data (JSON-LD) dynamically
+      function injectProductSchema(product) {
+        var script = document.createElement('script');
+        script.type = 'application/ld+json';
+        script.textContent = JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Product",
+          "name": product.name_en + " Diorama",
+          "description": "AI-generated tilt-shift diorama miniature art of " + product.name_en + ". High resolution image with full AI prompt included.",
+          "image": "https://die-hu.github.io/" + product.preview,
+          "url": "https://die-hu.github.io/product.html?id=" + product.id,
+          "brand": {
+            "@type": "Brand",
+            "name": "Diorama Studio"
+          },
+          "offers": {
+            "@type": "Offer",
+            "price": "4.99",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock",
+            "url": "https://die-hu.github.io/product.html?id=" + product.id
+          },
+          "category": product.category === "nature" ? "Nature Art" : "University Art"
+        });
+        document.head.appendChild(script);
+      }
+
+      // injectProductSchema is called from within populateProduct above
     })();
   </script>
 </body>

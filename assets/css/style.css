@@ -381,9 +381,9 @@ h4 { font-size: 1.1rem; }
 }
 
 .card:hover {
-  border-color: var(--border-glass);
+  border-color: var(--gold-dark);
   transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px var(--gold-glow);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 20px var(--gold-glow), 0 0 40px var(--gold-glow);
 }
 
 .card__image {
@@ -985,6 +985,155 @@ h4 { font-size: 1.1rem; }
 
 .nav__mobile-menu a:hover {
   color: var(--gold);
+}
+
+/* --- Gallery Search Box --- */
+.gallery-search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.gallery-search__input {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.65rem 1.2rem;
+  border-radius: 50px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.gallery-search__input::placeholder {
+  color: var(--text-muted);
+}
+
+.gallery-search__input:focus {
+  border-color: var(--gold-dark);
+}
+
+/* --- Filter Button Count Badge --- */
+.filter-btn .filter-count {
+  display: inline-block;
+  font-size: 0.7rem;
+  background: var(--gold-glow);
+  color: var(--gold);
+  padding: 0.1rem 0.45rem;
+  border-radius: 50px;
+  margin-left: 0.35rem;
+  font-weight: 600;
+  min-width: 1.3em;
+  text-align: center;
+}
+
+/* --- Breadcrumb Navigation --- */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.breadcrumb a {
+  color: var(--text-secondary);
+}
+
+.breadcrumb a:hover {
+  color: var(--gold);
+}
+
+.breadcrumb__sep {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+}
+
+.breadcrumb__current {
+  color: var(--text-primary);
+}
+
+/* --- Product Image Zoom --- */
+.product__image-wrap {
+  overflow: hidden;
+}
+
+.product__image-wrap img {
+  transition: transform 0.5s ease;
+}
+
+.product__image-wrap:hover img {
+  transform: scale(1.08);
+}
+
+/* --- Share Button --- */
+.product__share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.product__share-btn:hover {
+  border-color: var(--gold-dark);
+  color: var(--gold);
+}
+
+.product__share-btn.copied {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* --- View All Button --- */
+.featured__view-all {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+/* --- Mobile Menu Close Button --- */
+.nav__mobile-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 1001;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--transition-fast);
+}
+
+.nav__mobile-close:hover {
+  color: var(--gold);
+}
+
+/* --- Mobile Menu Animation --- */
+.nav__mobile-menu {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.nav__mobile-menu.active {
+  opacity: 1;
 }
 
 /* --- Responsive --- */

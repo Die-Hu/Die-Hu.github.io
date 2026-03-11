@@ -153,19 +153,35 @@ function initLightbox() {
 function initMobileMenu() {
   const toggle = document.querySelector('.nav__mobile-toggle');
   const menu = document.querySelector('.nav__mobile-menu');
+  const closeBtn = document.querySelector('.nav__mobile-close');
   if (!toggle || !menu) return;
 
+  function openMenu() {
+    menu.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    toggle.textContent = '\u2715';
+  }
+
+  function closeMenu() {
+    menu.classList.remove('active');
+    document.body.style.overflow = '';
+    toggle.textContent = '\u2630';
+  }
+
   toggle.addEventListener('click', () => {
-    const isOpen = menu.classList.toggle('active');
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    toggle.textContent = isOpen ? '\u2715' : '\u2630';
+    if (menu.classList.contains('active')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
+  // Close button (X) inside mobile menu
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeMenu);
+  }
+
   menu.querySelectorAll('a').forEach((a) => {
-    a.addEventListener('click', () => {
-      menu.classList.remove('active');
-      document.body.style.overflow = '';
-      toggle.textContent = '\u2630';
-    });
+    a.addEventListener('click', closeMenu);
   });
 }
