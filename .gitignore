@@ -9,3 +9,10 @@ Thumbs.db
 
 # Development
 payment-flow.md
+
+# Playwright MCP downloads (auto-generated, not for git)
+.playwright-mcp/
+
+# Playwright screenshots
+page-*.png
+*-preview.png

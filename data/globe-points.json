@@ -827,6 +827,30 @@
       "preview": "assets/images/preview/ucsd-diorama-preview.jpg",
       "thumbnail": "assets/images/thumbnails/ucsd-diorama-thumb.jpg",
       "productUrl": "product.html?id=ucsd"
+    },
+    {
+      "id": "umich",
+      "lat": 42.278,
+      "lng": -83.7382,
+      "name_cn": "密歇根大学",
+      "name_en": "University of Michigan",
+      "category": "university",
+      "region": "us-other",
+      "preview": "assets/images/preview/umich-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/umich-diorama-thumb.jpg",
+      "productUrl": "product.html?id=umich"
+    },
+    {
+      "id": "ucla",
+      "lat": 34.0689,
+      "lng": -118.4452,
+      "name_cn": "加州大学洛杉矶分校",
+      "name_en": "UCLA",
+      "category": "university",
+      "region": "us-west",
+      "preview": "assets/images/preview/ucla-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/ucla-diorama-thumb.jpg",
+      "productUrl": "product.html?id=ucla"
     }
   ]
 }

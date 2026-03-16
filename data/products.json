@@ -709,7 +709,27 @@
       "prompt_file": "prompts/ucsd.txt",
       "preview": "assets/images/preview/ucsd-diorama-preview.jpg",
       "thumbnail": "assets/images/thumbnails/ucsd-diorama-thumb.jpg"
+    },
+    {
+      "id": "umich",
+      "name_en": "University of Michigan",
+      "name_cn": "密歇根大学",
+      "category": "university",
+      "source_image": "umich-diorama.png",
+      "prompt_file": "prompts/umich.txt",
+      "preview": "assets/images/preview/umich-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/umich-diorama-thumb.jpg"
+    },
+    {
+      "id": "ucla",
+      "name_en": "UCLA",
+      "name_cn": "加州大学洛杉矶分校",
+      "category": "university",
+      "source_image": "ucla-diorama.png",
+      "prompt_file": "prompts/ucla.txt",
+      "preview": "assets/images/preview/ucla-diorama-preview.jpg",
+      "thumbnail": "assets/images/thumbnails/ucla-diorama-thumb.jpg"
     }
   ],
-  "total": 51
+  "total": 73
 }
